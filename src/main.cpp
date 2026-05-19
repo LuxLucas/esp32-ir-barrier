@@ -45,4 +45,3 @@ void loop(){
     Serial.println("Sinal perdido");
     isLostReported = true;
   }
-}
