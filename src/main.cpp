@@ -26,22 +26,23 @@ void loop(){
     irSend.sendNEC(0x0, 32); 
 
     if (irRecv.decode(&results)){
-    irRecv.resume();
+        irRecv.resume();
 
-    if(results.value == 0){
-      serialPrintUint64(results.value, HEX);
-      Serial.println("");
+        if(results.value == 0){
+            serialPrintUint64(results.value, HEX);
+            Serial.println("");
 
-      digitalWrite(LED_BUILTIN, HIGH);
-      delay(100);
-      digitalWrite(LED_BUILTIN, LOW);
+            digitalWrite(LED_BUILTIN, HIGH);
+            delay(100);
+            digitalWrite(LED_BUILTIN, LOW);
 
-      lastTimeRecv = millis();
-      isLostReported = false;
+            lastTimeRecv = millis();
+            isLostReported = false;
+        }
     }
-  }
 
-  if((millis() - lastTimeRecv > 200) && !isLostReported){
-    Serial.println("Sinal perdido");
-    isLostReported = true;
-  }
+    if((millis() - lastTimeRecv > 200) && !isLostReported){
+        Serial.println("Sinal perdido");
+        isLostReported = true;
+    }
+}
